@@ -1,0 +1,38 @@
+/* registration */
+.register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    background-color:aquamarine
+  }
+
+  .form{
+    box-shadow: 0px 5px 15px black;
+    padding: 40px;
+    background-color: aliceblue;
+  }
+
+.heading{
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+}
+.form-control{
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+}
+
+.btn1{
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    background-color: black;
+    color: white;
+    width: 250px;
+    height: 35px;
+}
+.tableFont{
+  font-size: smaller;
+}
