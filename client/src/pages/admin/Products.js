@@ -3,15 +3,18 @@ import AdminMenu from './AdminMenu'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../contextApi.js/authContext'
 
 const Products = () => {
 
   const [products, setProducts] = useState([])
+  const [id,setId] = useAuth()
 
   const getAllProducts = async () => {
     try {
       const res = await axios.get(`${process.env.REACT_APP_PORT}/get-product`);
       setProducts(res.data.products)
+     
     }
     catch (err) {
       console.log(err);

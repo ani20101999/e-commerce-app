@@ -5,11 +5,13 @@ import { Link,useNavigate } from 'react-router-dom';
 import { Checkbox,Radio } from 'antd';
 import { Prices } from '../components/Prices';
 import { useCart } from '../contextApi.js/cart';
+import { useAuth } from '../contextApi.js/authContext';
 
 const Home = () => {
 
 const navigate = useNavigate()
 const [cart,setCart] = useCart()
+const [id,setId] = useAuth()
 const [products,setProducts] = useState([]);
 const [categories,setCategories] = useState([]);
 const [checked,setChecked] = useState([]);
@@ -115,14 +117,14 @@ const handleFilter = (value,id)=>{
             
               {products?.map((p) => (
                 
-                <div className="card m-2" style={{ width: '18rem' }} key={p._id}>
+                <div className="card m-2" style={{ width: '18rem', boxShadow:"0px 5px 15px black"}} key={p._id}>
                   <img src={`${process.env.REACT_APP_PORT}/get-photo/${p._id}`} className="card-img-top" alt={p.name} style={{maxWidth:"150px",maxHeight:"200px",margin:"auto"}}/>
                   <div className="card-body">
                     <h5 className="card-title" style={{fontSize:"30px",fontFamily:"sans-serif"}}>{p.name}</h5>
                     <p className="card-text" style={{fontSize:"small"}}>{p.description.substring(0,30)}</p>
                     <p className="card-text" style={{fontSize:"large"}}>₹{p.price}</p>
                     
-                    <button type='button' className="btn btn-primary m-2" onClick={() => navigate(`/product-details/${p.slug}`)}>More Details</button>
+                    <button type='button' className="btn btn-primary m-2" onClick={() =>{setId(p);localStorage.setItem("id",JSON.stringify(p));navigate(`/product-details/${p.slug}`)}}>More Details</button>
                     <button type='button' className="btn btn-secondary ms-1" 
                     onClick={()=>{setCart([...cart,p]);
                       localStorage.setItem("cart",JSON.stringify([...cart,p]));

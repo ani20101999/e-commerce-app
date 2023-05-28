@@ -4,8 +4,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import "../styles/authStyles.css"
 
+
 const Register = () => {
 const navigate = useNavigate();
+
 
 const [name,setName] = useState("");
 const [email,setEmail] = useState("");

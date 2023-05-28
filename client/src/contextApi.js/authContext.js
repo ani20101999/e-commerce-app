@@ -10,7 +10,7 @@ const authContext = createContext();
   })
 
   useEffect(()=>{
-    const data = localStorage.getItem(auth);
+    const data = localStorage.getItem("auth");
     if(data){
         const parsedData = JSON.parse(data);
         setAuth({
@@ -19,10 +19,33 @@ const authContext = createContext();
             token:parsedData.token
         })
     }
-  },[auth]);
+  },[]);
+
+  const [id,setId] = useState({
+    _id:"",
+    name:"",
+    price:"",
+    description:"",
+    category:""
+  });
+
+  useEffect(()=>{
+    const data = localStorage.getItem("id");
+    if(data){
+      const parseData = JSON.parse(data);
+      setId({
+        ...id,
+        _id:parseData._id,
+        name:parseData.name,
+        price:parseData.price,
+        description:parseData.description,
+        category:parseData.category
+      })
+    }
+  },[])
 
   return (
-    <authContext.Provider value={[auth,setAuth]}>
+    <authContext.Provider value={[auth,setAuth,id,setId]}>
     {children}
     </authContext.Provider>
   )
