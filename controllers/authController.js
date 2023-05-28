@@ -139,4 +139,29 @@ const testController =(req,res)=>{
         res.status(500).send(err)
     }
 }
-module.exports = {registerController,loginController,testController,forgotPasswordController}
+
+
+const updateController = async(req,res)=>{
+try{
+const {name,email,password,phone,address} = req.body;
+const hashedPassword = password ? await hashPassword(password) : undefined
+const user = await userModel.findByIdAndUpdate(req.user._id,{
+    name:name,
+    password:hashedPassword,
+    phone:phone,
+    address:address
+},{new:true})
+res.status(200).send({
+    success:true,
+    message:"updated successfully",
+    user
+})
+}
+catch(err){
+    res.status(500).send({
+        success:false,
+        message:err
+})
+}
+}
+module.exports = {registerController,loginController,testController,forgotPasswordController,updateController}

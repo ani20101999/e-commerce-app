@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router()
-const {registerController,loginController,testController,forgotPasswordController} = require("../controllers/authController")
+const {registerController,loginController,testController,forgotPasswordController,updateController} = require("../controllers/authController")
 const {requireSignin,isAdmin} = require("../middlewares/authMiddleware")
 //registration
 route.post("/register",registerController)
@@ -24,4 +24,6 @@ route.get("/admin-route",requireSignin,isAdmin,(req,res)=>{
     res.status(200).send({ok:true});
 })
 
+//update 
+route.put("/update",requireSignin,updateController)
 module.exports = route;
